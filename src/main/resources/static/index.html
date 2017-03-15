@@ -1,0 +1,6 @@
+<script>
+    var source = new EventSource("orientation");
+    source.onmessage = function(event) {
+        console.log(event.data);
+    };
+</script>

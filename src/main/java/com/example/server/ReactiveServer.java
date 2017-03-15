@@ -1,19 +1,19 @@
 package com.example.server;
 
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import reactor.core.publisher.Flux;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
 public class ReactiveServer {
 
     @GetMapping(path = "/orientation", produces = "text/event-stream")
-    public Flux<OrientationData> getOrientation() {
+    public Mono<OrientationData> getOrientation() {
 
-        return Flux.just(new OrientationData(0,0,0),
-                new OrientationData(1,0,0),
-                new OrientationData(2, 0,0));
+        return Mono.just(new OrientationData(0,0,0));
     }
 
 }

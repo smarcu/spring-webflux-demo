@@ -5,3 +5,6 @@ example based on https://spring.io/blog/2016/07/20/notes-on-reactive-programming
 
 
 ## Git tags for presentation:
+* STEP-1
+    * add server method @GetMapping
+    * add javascript consuming "text/event-stream" (server sent events)
