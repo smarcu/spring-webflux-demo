@@ -1,7 +1,13 @@
-# spring-reactor-demo2
-Spring Reactor Demo 2
+# spring-webflux-demo
+Spring WebFlux Demo
 
-example based on https://spring.io/blog/2016/07/20/notes-on-reactive-programming-part-iii-a-simple-http-server-application
+## Info
+Project showing a reactive example of handling realtime sensor data
+
+##Reference articles
+ * https://spring.io/blog/2017/02/23/spring-framework-5-0-m5-update
+ * https://spring.io/blog/2016/07/20/notes-on-reactive-programming-part-iii-a-simple-http-server-application
+ * https://www.w3schools.com/html/html5_serversentevents.asp
 
 
 ## Git tags for presentation:
