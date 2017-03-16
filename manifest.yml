@@ -1,0 +1,6 @@
+---
+applications:
+  - name: react007
+    buildpack: java_buildpack
+    path: target/spring-reactor-demo2-0.0.1-SNAPSHOT.jar
+

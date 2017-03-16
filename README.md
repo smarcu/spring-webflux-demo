@@ -9,6 +9,8 @@ Project showing a reactive example of handling realtime sensor data
  * https://spring.io/blog/2016/07/20/notes-on-reactive-programming-part-iii-a-simple-http-server-application
  * https://www.w3schools.com/html/html5_serversentevents.asp
 
+## How to run
+in order to run on pivotal cloud, create an account, update the project name in manifest.yml
 
 ## Git tags for presentation:
 * STEP-1
