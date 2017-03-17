@@ -3,10 +3,10 @@ package com.example.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.integration.dsl.channel.MessageChannels;
-import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.FluxSink;
 
-import java.util.Random;
-
 @RestController
 public class ReactiveServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(ReactiveServer.class);
 
+    @Autowired
+    private SubscribableChannel dataChannel;
+    
     @Bean
     private SubscribableChannel dataChannel() {
         return MessageChannels.publishSubscribe().get();
@@ -40,8 +41,8 @@ public class ReactiveServer {
                 LOG.info("MESSAGE HANDLER {}", msg);
                 fsink.next(OrientationData.class.cast(msg.getPayload()));
             };
-            fsink.setCancellation(() -> dataChannel().unsubscribe(handler));
-            dataChannel().subscribe(handler);
+            fsink.setCancellation(() -> dataChannel.unsubscribe(handler));
+            dataChannel.subscribe(handler);
         });
 
     }
@@ -51,7 +52,7 @@ public class ReactiveServer {
 
         LOG.info("add orientation - HTTP PUT CALLED {}", orientationData);
 
-        dataChannel().send(new GenericMessage<>(orientationData));
+        dataChannel.send(new GenericMessage<>(orientationData));
 
     }
 
@@ -62,7 +63,7 @@ public class ReactiveServer {
 
         orientationDataFlux.doOnEach(msg -> {
             LOG.info("add orientation - MSG RECEIVED {}", msg);
-            dataChannel().send(new GenericMessage<>(msg.get()));
+            dataChannel.send(new GenericMessage<>(msg.get()));
         });
 
     }
