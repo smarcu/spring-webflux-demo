@@ -6,15 +6,18 @@
 
 <body>
 
-<h1>Getting server updates</h1>
+<h1>Crowd Control Gyroscope</h1>
 <div id="gyroscopeData"></div>
 <div id="serverData"></div>
+<canvas id="myCanvas" width="600" height="600" style="background: yellow"></canvas>
 
 <script>
     if(typeof(EventSource) !== "undefined") {
         var source = new EventSource("orientation");
         source.onmessage = function(event) {
-            document.getElementById("serverData").innerHTML += event.data + "<br>";
+        	var data = JSON.parse( event.data );
+            console.log( data );
+            drawPosition(data.x, data.y);
         };
     } else {
         document.getElementById("serverData").innerHTML = "Sorry, your browser does not support server-sent events...";
@@ -62,6 +65,22 @@
     }
     
     sendToServer(1,1,1);
+    
+    function drawPosition(x,y) {
+    	console.log(x+"-"+y);
+    	var canvas = document.getElementById("myCanvas");
+    	var ctx = canvas.getContext("2d");
+    	ctx.clearRect(0, 0, canvas.width, canvas.height);
+    	// mark center
+    	ctx.font = "100px Arial";
+    	ctx.fillText("O",279,318);
+    	// draw cursor
+    	ctx.font = "70px Arial";
+    	ctx.fillText("x",x+300,y+300);
+    }
+    
+    drawPosition(0,0);
+    
 </script>
 
 </body>
