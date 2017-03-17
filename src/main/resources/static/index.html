@@ -1,19 +1,67 @@
 <!DOCTYPE html>
 <html>
+
+<script src="gyroscope.js"></script>
+
+
 <body>
 
 <h1>Getting server updates</h1>
-<div id="result"></div>
+<div id="gyroscopeData"></div>
+<div id="serverData"></div>
 
 <script>
     if(typeof(EventSource) !== "undefined") {
         var source = new EventSource("orientation");
         source.onmessage = function(event) {
-            document.getElementById("result").innerHTML += event.data + "<br>";
+            document.getElementById("serverData").innerHTML += event.data + "<br>";
         };
     } else {
-        document.getElementById("result").innerHTML = "Sorry, your browser does not support server-sent events...";
+        document.getElementById("serverData").innerHTML = "Sorry, your browser does not support server-sent events...";
     }
+    
+    // GYROSCOPE EVENTS
+    initGyroscope(
+   		// gyro event handler
+   		function(tiltLR,tiltFB,direction){   	        
+   	        sendToServer(parseInt(tiltLR), parseInt(tiltFB), parseInt(direction));
+   		}, 
+   		// gyro error handler
+   		function() {
+       		document.getElementById("gyroscopeData").innerHTML = "gyroscope not supported";    	
+   		}
+    );
+    
+    // SENDING DATA TO SERVER
+    
+    // cache to check for change
+    var lastLR, lastFB, lastDir;
+    
+    function sendToServer(lr, fb, dir) {
+    	var changed = lr != lastLR || fb != lastFB || lastDir != dir;
+    	lastLR = lr;
+    	lastFB = fb;
+    	lastDir = dir;
+        document.getElementById("gyroscopeData").innerHTML = "gyroscope:"+lr+" "+fb+" "+dir +" " + (changed?" + ":"");
+		if (changed) {
+	        var xmlhttp = new XMLHttpRequest();
+	        xmlhttp.onreadystatechange = function() {
+	            if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+	               if (xmlhttp.status == 200) {
+	            	   console.log("http put sent");
+	               }
+	               else {
+	                   console.log("http error "+xmlhttp.status);
+	               }
+	            }
+	        };
+	        xmlhttp.open("PUT", "orientation", true);
+	        xmlhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+	        xmlhttp.send('{"x":'+lr+', "y":'+fb+', "z":'+dir+'}');
+    	}
+    }
+    
+    sendToServer(1,1,1);
 </script>
 
 </body>

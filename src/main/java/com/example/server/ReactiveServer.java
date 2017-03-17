@@ -12,6 +12,7 @@ import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import reactor.core.publisher.Flux;
@@ -33,7 +34,7 @@ public class ReactiveServer {
     @GetMapping(path = "/orientation", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<OrientationData> getOrientation() {
 
-        LOG.info("get orientation - HTTP GET CALLED {}");
+        LOG.info("get orientation - HTTP GET CALLED");
 
         return Flux.create( sink -> {
             FluxSink<OrientationData> fsink = sink.serialize();
@@ -48,7 +49,7 @@ public class ReactiveServer {
     }
 
     @PutMapping(path = "/orientation")
-    public void addOrientation(OrientationData orientationData) {
+    public void addOrientation(@RequestBody OrientationData orientationData) {
 
         LOG.info("add orientation - HTTP PUT CALLED {}", orientationData);
 

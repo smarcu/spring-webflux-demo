@@ -13,6 +13,7 @@ Project showing a reactive example of handling realtime sensor data
 ## How to run
 in order to run on pivotal cloud, create an account, update the project name in manifest.yml
 - run "cf push project_name" to deploy on cloud
+- view local page at http://localhost:8080/index.html
 
 ## Git tags for presentation:
 * STEP-1
@@ -21,4 +22,7 @@ in order to run on pivotal cloud, create an account, update the project name in 
 
 * STEP-2
     * add spring integration (channel message)
+    
+* STEP-3
+    * implement gyroscope on javascript, send events from browser
     
