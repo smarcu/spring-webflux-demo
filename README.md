@@ -8,6 +8,7 @@ Project showing a reactive example of handling realtime sensor data
  * https://spring.io/blog/2017/02/23/spring-framework-5-0-m5-update
  * https://spring.io/blog/2016/07/20/notes-on-reactive-programming-part-iii-a-simple-http-server-application
  * https://www.w3schools.com/html/html5_serversentevents.asp
+ * https://www.youtube.com/watch?v=2To3_mYT2hc
 
 ## How to run
 in order to run on pivotal cloud, create an account, update the project name in manifest.yml
@@ -17,3 +18,7 @@ in order to run on pivotal cloud, create an account, update the project name in 
 * STEP-1
     * add server method @GetMapping
     * add javascript consuming "text/event-stream" (server sent events)
+
+* STEP-2
+    * add spring integration (channel message)
+    

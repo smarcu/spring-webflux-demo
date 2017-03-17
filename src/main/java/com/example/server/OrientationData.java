@@ -9,6 +9,9 @@ public class OrientationData {
     private int y;
     private int z;
 
+    public OrientationData() {
+    }
+
     public OrientationData(int x, int y, int z) {
         this.x = x;
         this.y = y;
