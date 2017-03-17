@@ -1,5 +1,7 @@
 package com.example.server;
 
+import java.util.List;
+
 /**
  * x,y,z orientation values
  */
@@ -49,5 +51,14 @@ public class OrientationData {
                 ", y=" + y +
                 ", z=" + z +
                 '}';
+    }
+    
+    public static OrientationData average(List<OrientationData> data) {
+    	final OrientationData result = new OrientationData();
+    	data.stream().forEach(od -> {result.x+=od.x; result.y+=od.y; result.z+=od.z;});
+    	result.x = result.x / data.size();
+    	result.y = result.y / data.size();
+    	result.z = result.z / data.size();
+    	return result;
     }
 }

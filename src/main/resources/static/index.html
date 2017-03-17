@@ -63,9 +63,7 @@
 	        xmlhttp.send('{"x":'+lr+', "y":'+fb+', "z":'+dir+'}');
     	}
     }
-    
-    sendToServer(1,1,1);
-    
+        
     function drawPosition(x,y) {
     	console.log(x+"-"+y);
     	var canvas = document.getElementById("myCanvas");
@@ -81,6 +79,8 @@
     
     drawPosition(0,0);
     
+    sendToServer(1,1,1);
+
 </script>
 
 </body>

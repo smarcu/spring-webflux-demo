@@ -25,5 +25,8 @@ in order to run on pivotal cloud, create an account, update the project name in 
     
 * STEP-3
     * implement gyroscope on javascript, send events from browser
-    * draw position using server sent events
+    * 
+* STEP-4
+	* link input messages using inputChannel - flux - outputChannel
+	* calculate average on input values
     
