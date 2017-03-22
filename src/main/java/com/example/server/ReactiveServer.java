@@ -37,7 +37,7 @@ public class ReactiveServer {
     		inDataChannel.subscribe(msg -> emitter.next( OrientationData.class.cast( msg.getPayload() )));
     	}, FluxSink.OverflowStrategy.LATEST);
 
-    	//flux = flux.buffer(50).map(OrientationData::average);  
+    	flux = flux.buffer(3).map(OrientationData::average);
     	
     	ConnectableFlux<OrientationData> hot = flux.publish();
     	

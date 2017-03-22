@@ -16,7 +16,7 @@
         var source = new EventSource("orientation");
         source.onmessage = function(event) {
         	var data = JSON.parse( event.data );
-            console.log( data );
+            //console.log( data );
             drawPosition(data.x, data.y);
         };
     } else {
@@ -65,7 +65,7 @@
     }
         
     function drawPosition(x,y) {
-    	console.log(x+"-"+y);
+    	//console.log(x+"-"+y);
     	var canvas = document.getElementById("myCanvas");
     	var ctx = canvas.getContext("2d");
     	ctx.clearRect(0, 0, canvas.width, canvas.height);
