@@ -1,6 +1,8 @@
 package com.example.server;
 
 
+import java.time.Duration;
+
 import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
@@ -37,8 +39,8 @@ public class ReactiveServer {
     		inDataChannel.subscribe(msg -> emitter.next( OrientationData.class.cast( msg.getPayload() )));
     	}, FluxSink.OverflowStrategy.LATEST);
 
-    	flux = flux.buffer(3).map(OrientationData::average);
-    	
+    	flux = flux.buffer(Duration.ofSeconds(3)).map(OrientationData::average);
+
     	ConnectableFlux<OrientationData> hot = flux.publish();
     	
     	hot.subscribe(orientationData -> outDataChannel.send(new GenericMessage<>(orientationData)));

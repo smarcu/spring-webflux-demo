@@ -61,4 +61,5 @@ public class OrientationData {
     	result.z = result.z / data.size();
     	return result;
     }
+
 }
