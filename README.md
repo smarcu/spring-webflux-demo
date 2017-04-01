@@ -3,6 +3,8 @@ Spring WebFlux Demo
 
 ## Info
 Project showing a reactive example of handling realtime sensor data
+Example project used in presentation https://github.com/smarcu/ReactivePresentation/blob/master/Reactive.pdf
+
 
 ## Reference articles
  * https://spring.io/blog/2017/02/23/spring-framework-5-0-m5-update
